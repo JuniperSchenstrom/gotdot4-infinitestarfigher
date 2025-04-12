@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://lsh3o4l0o7xu"]
+
+[ext_resource type="Script" path="res://scenes/entities/player/player.gd" id="1_xai20"]
+[ext_resource type="Texture2D" uid="uid://dhue2wpd6rv2r" path="res://textures/ship_player.png" id="2_v3swy"]
+[ext_resource type="Texture2D" uid="uid://b6dp4m5xkkvw1" path="res://textures/ship_player_fireSecondary.png" id="4_hsslp"]
+[ext_resource type="Texture2D" uid="uid://u4sqyb3xc4jw" path="res://textures/afterburner.png" id="5_gotfh"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_xai20")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-16, 56, -17, 48, -60, 33, -60, 14, -17, 23, -17, 15.0527, -16, 14, -11, 14, -10, 15, -10, 20, -8, 20, -8, 14, -7, 14, -5, -32, -23, -28, -23, -37, -5, -43, -4, -51, -1, -56, 1, -56, 4, -51, 5, -43, 23, -37, 23, -28, 5, -32, 7, 14, 8, 14, 8, 20, 10, 20, 10, 15, 11, 14, 16.0889, 14, 17, 15, 17, 23, 60, 14, 60, 33, 17, 48, 16, 56, 11, 56, 10, 48, 5, 52, -5, 52, -10, 48, -11, 56)
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Ship" type="Sprite2D" parent="Sprites"]
+texture = ExtResource("2_v3swy")
+
+[node name="FireSecondary" type="Sprite2D" parent="Sprites"]
+visible = false
+texture = ExtResource("4_hsslp")
+
+[node name="EngineAfterburner" type="Node2D" parent="Sprites"]
+visible = false
+
+[node name="AfterburnerLeft" type="Sprite2D" parent="Sprites/EngineAfterburner"]
+position = Vector2(-14, 65)
+scale = Vector2(0.583333, 0.583333)
+texture = ExtResource("5_gotfh")
+
+[node name="AfterburnerRight" type="Sprite2D" parent="Sprites/EngineAfterburner"]
+position = Vector2(14, 65)
+scale = Vector2(0.583333, 0.583333)
+texture = ExtResource("5_gotfh")
+flip_h = true
+
+[node name="RightRCS" type="Node2D" parent="Sprites"]
+
+[node name="FireDurationTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="FireCooldownsTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Slot1StartPos" type="Node2D" parent="."]
+
+[node name="Port" type="Marker2D" parent="Slot1StartPos"]
+position = Vector2(-8, 14)
+
+[node name="Starboard" type="Marker2D" parent="Slot1StartPos"]
+position = Vector2(8, 14)
+
+[node name="Slot2StartPos" type="Node2D" parent="."]
+
+[node name="Port" type="Marker2D" parent="Slot2StartPos"]
+position = Vector2(-27, 21)
+
+[node name="Starboard" type="Marker2D" parent="Slot2StartPos"]
+position = Vector2(27, 21)
+
+[connection signal="timeout" from="FireDurationTimer" to="." method="_on_fire_duration_timer_timeout"]
+[connection signal="timeout" from="FireCooldownsTimer" to="." method="_on_fire_cooldowns_timer_timeout"]
