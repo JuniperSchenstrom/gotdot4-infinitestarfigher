@@ -1,7 +1,6 @@
 extends Node2D
 
 static var projectile_properties: Array[Dictionary] = [{"type": "bullet_basic", "speed": 2000, "damage": 10, "lifetime": 2000, "special": true}]
-var projectile_scene: Array[PackedScene] = [preload("res://scenes/Projectiles/bullet.tscn")]
 var active_projectiles_ID_0: Array[Projectile] = []
 var inactive_projectiles_ID_0: Array[Projectile] = []
 
@@ -25,20 +24,6 @@ func _on_player_fire(port_position, starbrd_position, fire_direction, projectile
 	active_projectiles_ID_0.append(starbrd)
 	add_child(port)
 	add_child(starbrd)
-	"""var bullet_port = projectile_scene[0].instantiate() as Area2D
-	var bullet_starbrd = projectile_scene[0].instantiate() as Area2D
-	bullet_port.position = port_position
-	bullet_starbrd.position = starbrd_position
-	bullet_port.scale *= 0.5
-	bullet_starbrd.scale *= 0.5
-	bullet_port.direction = fire_direction
-	bullet_starbrd.direction = fire_direction
-	bullet_port.rotation_degrees = rad_to_deg(fire_direction.angle()) + 90
-	bullet_starbrd.rotation_degrees = rad_to_deg(fire_direction.angle()) + 90
-	
-	
-	add_child(bullet_port)
-	add_child(bullet_starbrd)"""
 
 class Projectile extends Area2D:
 	
