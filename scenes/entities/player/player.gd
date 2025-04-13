@@ -52,9 +52,8 @@ func _process(_delta):
 		
 		currently_firing = hotbar_select
 		$FireDurationTimer.start(hotbar_fire_durations[currently_firing])
-		fire.emit(fire_start_pos_port[currently_firing].global_position,
-				  fire_start_pos_starbrd[currently_firing].global_position,
-				  fire_direction, currently_firing)
+		fire.emit(fire_start_pos_port[currently_firing].global_position, fire_direction, currently_firing)
+		fire.emit(fire_start_pos_starbrd[currently_firing].global_position, fire_direction, currently_firing)
 		can_fire = false
 	
 	get_hotbar_input()
